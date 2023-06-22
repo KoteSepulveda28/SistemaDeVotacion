@@ -1,0 +1,75 @@
+CREATE TABLE t_region(
+id_region INT(11) PRIMARY KEY AUTO_INCREMENT,
+nombre_region VARCHAR(250) NOT NULL,
+vigente INT(1) NOT NULL
+);
+
+INSERT INTO t_region (nombre_region,vigente) VALUES ('Región del Maule', 1);
+INSERT INTO t_region (nombre_region,vigente) VALUES ('Región de los Ríos', 1);
+INSERT INTO t_region (nombre_region,vigente) VALUES ('Región Metropolitana', 1);
+
+
+SELECT * FROM t_comuna;
+
+-- [COMUNA]
+
+CREATE TABLE t_comuna(
+id_comuna INT(11) PRIMARY KEY AUTO_INCREMENT,
+nombre_comuna VARCHAR(250) NOT NULL,
+vigente INT(1)
+);
+
+ALTER TABLE t_comuna ADD COLUMN id_region INT(11);
+ALTER TABLE t_comuna ADD CONSTRAINT fk_id_region FOREIGN KEY (id_region) REFERENCES t_region(id_region); 
+
+INSERT INTO t_comuna (nombre_comuna, vigente, id_region) VALUES ('Cauquenes', 1,1);
+INSERT INTO t_comuna (nombre_comuna, vigente, id_region) VALUES ('Chanco', 1,1);
+INSERT INTO t_comuna (nombre_comuna, vigente, id_region) VALUES ('Lanco', 1,2);
+INSERT INTO t_comuna (nombre_comuna, vigente, id_region) VALUES ('Valdivia', 1,2);
+INSERT INTO t_comuna (nombre_comuna, vigente, id_region) VALUES ('Buin', 1,3);
+INSERT INTO t_comuna (nombre_comuna, vigente, id_region) VALUES ('Paine', 1,3);
+
+
+
+
+CREATE TABLE t_candidato(
+id_candidato INT(11) PRIMARY KEY AUTO_INCREMENT,
+nombre_candidato VARCHAR(250) NOT NULL,
+vigente INT(1)
+);
+
+INSERT INTO t_candidato(nombre_candidato, vigente) VALUES ('Candidato 1',1);
+INSERT INTO t_candidato(nombre_candidato, vigente) VALUES ('Candidato 2',1);
+INSERT INTO t_candidato(nombre_candidato, vigente) VALUES ('Candidato 3',1);
+INSERT INTO t_candidato(nombre_candidato, vigente) VALUES ('Candidato 4',1);
+INSERT INTO t_candidato(nombre_candidato, vigente) VALUES ('Candidato 5',1);
+
+SELECT * FROM t_candidato;
+
+
+DROP TABLE t_votacion;
+
+CREATE TABLE t_votacion (
+id_votacion INT(11) PRIMARY KEY AUTO_INCREMENT,
+nombre_votante VARCHAR(250) NOT NULL,
+alias_votante VARCHAR (250) NOT NULL, 
+rut_votante INT(11) NOT NULL,
+dv_votante VARCHAR(1) NOT NULL,	
+email_votante VARCHAR(250) NOT NULL
+);
+
+
+DROP TABLE t_detalle;
+
+CREATE TABLE t_detalle(
+id_detalle INT(11) PRIMARY KEY AUTO_INCREMENT,
+comuna INT (11),
+detalle VARCHAR (250) NOT NULL
+);
+
+
+ALTER TABLE t_detalle ADD COLUMN id_votacion INT(11);
+ALTER TABLE t_detalle ADD CONSTRAINT fk_id_votacion FOREIGN KEY (id_votacion) REFERENCES t_votacion(id_votacion);
+
+ALTER TABLE t_detalle ADD COLUMN id_candidato INT(11);
+ALTER TABLE t_detalle ADD CONSTRAINT fk_id_candidato FOREIGN KEY (id_candidato) REFERENCES t_candidato(id_candidato);

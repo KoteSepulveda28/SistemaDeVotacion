@@ -15,6 +15,6 @@ siguiente ruta: http://localhost/AreaDeTrabajo/SistemaDeVotacion/frontend/pages/
 Nota:
 
 Versión php : 8.2.4
-Version MySql 
+Version MySql : MariaDB 10.4.28
 
 
