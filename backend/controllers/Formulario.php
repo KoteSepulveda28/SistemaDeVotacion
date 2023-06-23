@@ -199,7 +199,7 @@
             array_push($arrayValidaciones, $dataAux);
         }
 
-        if(strlen($arrayDatos["alias_votante"]) < 5)
+        if(strlen($arrayDatos["alias_votante"]) < 5 || !preg_match('/^[a-zA-Z0-9]+$/', $arrayDatos["alias_votante"]))
         {
             $dataAux = array("ID" => 'txtAlias', "required" => "El campo debe tener almenos 5 caracteres, ademas solo letras y números");
             array_push($arrayValidaciones, $dataAux);
